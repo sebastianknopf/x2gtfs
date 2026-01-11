@@ -2,6 +2,39 @@ from dataclasses import dataclass
 from typing import Optional
 
 @dataclass
+class Stop:
+    stop_id: str = ""
+    stop_name: str = ""
+    stop_lat: float = 0.0
+    stop_lon: float = 0.0
+    stop_code: Optional[str] = None
+    stop_desc: Optional[str] = None
+    zone_id: Optional[str] = None
+    stop_url: Optional[str] = None
+    location_type: int = 0  # 0 = Stop, 1 = Station
+    parent_station: Optional[str] = None
+    wheelchair_boarding: Optional[int] = None
+
+@dataclass
+class Calendar:
+    service_id: str = ""
+    monday: int = 0
+    tuesday: int = 0
+    wednesday: int = 0
+    thursday: int = 0
+    friday: int = 0
+    saturday: int = 0
+    sunday: int = 0
+    start_date: str = "19700101"  # YYYYMMDD
+    end_date: str = "19700101"    # YYYYMMDD
+
+@dataclass
+class CalendarDate:
+    service_id: str = ""
+    date: str = "19700101"   # YYYYMMDD
+    exception_type: int = 1  # 1 = added, 2 = removed
+
+@dataclass
 class Agency:
     agency_name: str = ""
     agency_url: str = ""
@@ -22,20 +55,6 @@ class Route:
     route_url: Optional[str] = None
     route_color: Optional[str] = None
     route_text_color: Optional[str] = None
-
-@dataclass
-class Stop:
-    stop_id: str = ""
-    stop_name: str = ""
-    stop_lat: float = 0.0
-    stop_lon: float = 0.0
-    stop_code: Optional[str] = None
-    stop_desc: Optional[str] = None
-    zone_id: Optional[str] = None
-    stop_url: Optional[str] = None
-    location_type: int = 0  # 0 = Stop, 1 = Station
-    parent_station: Optional[str] = None
-    wheelchair_boarding: Optional[int] = None
 
 @dataclass
 class Trip:

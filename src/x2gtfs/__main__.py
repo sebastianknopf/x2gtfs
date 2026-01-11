@@ -10,7 +10,7 @@ from openpyxl.utils import column_index_from_string
 
 from x2gtfs.config import Configuration
 from x2gtfs.iterator import iter_data_vertical, iter_data_horizontal
-from x2gtfs.models import Trip, StopTime
+from x2gtfs.models import Stop, Calendar, CalendarDate, Agency, Route, Trip, StopTime
 from x2gtfs.gtfs import Feed
 
 
@@ -24,9 +24,25 @@ def main(inputfilename, outputfilename):
         config: dict = yaml.safe_load(inputfile)
         Configuration.apply_config(config)
 
-    # define containers for results
+    # define containers for results and meta data lookups
+    stop_result_list: dict[str, Stop] = {}
+    calendar_result_list: dict[str, Calendar] = {}
+    calendar_date_result_list: dict[str, list[CalendarDate]] = {}
+    agency_result_list: dict[str, Agency] = {}
+    route_result_list: dict[str, Route] = {}
+    
     trip_result_list: list[Trip] = []
     stop_time_result_list: list[StopTime] = []
+
+    # read meta data here if available
+    # stop data
+    # TODO: read stop meta data
+
+    # calendar data
+    # TODO: read calendar meta data
+
+    # route data
+    # TODO: read route meta data
 
     # run over timetable input files and process each one
     for input_filename in os.listdir(Configuration.config.timetables.input_directory):
@@ -93,9 +109,16 @@ def main(inputfilename, outputfilename):
 
     # create GTFS output files
     feed = Feed()
-    #feed.add_data('agency.txt', [])
-    #feed.add_data('stops.txt', [])
-    #feed.add_data('routes.txt', [])
+    feed.add_data('stops.txt', list(stop_result_list.values()))
+
+    if len(calendar_result_list) > 0:
+        feed.add_data('calendar.txt', list(calendar_result_list.values()))
+    if len(calendar_date_result_list) > 0:
+        feed.add_data('calendar_dates.txt', [cd for cdl in calendar_date_result_list.values() for cd in cdl])
+
+    feed.add_data('agency.txt', list(agency_result_list.values()))
+    feed.add_data('routes.txt', list(route_result_list.values()))
+
     feed.add_data('trips.txt', trip_result_list)
     feed.add_data('stop_times.txt', stop_time_result_list)
 
