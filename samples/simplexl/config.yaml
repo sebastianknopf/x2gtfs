@@ -1,0 +1,13 @@
+config:
+  timetables:
+    input_directory: ./samples/simplexl/
+    layout_type: vertical
+    run_through_char: $
+    time_format: "%H:%M:%S"
+    data_start_area: C6
+    stop_identification_index: B
+    route_identification_index: 1
+    service_identification_index: 5
+    shape_identification_index: 2
+    trip_short_name_index: 3
+    trip_headsign_index: 4

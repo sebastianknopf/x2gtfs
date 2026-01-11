@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "x2gtfs"
+description = "Converter for generating GTFS data out of arbitrary timetable data."
+authors = [{ name = "Sebastian Knopf", email = "mail@sebastian-knopf.de" }]
+readme = "README.md"
+license = {text = "Apache License (2.0)"}
+dependencies = [
+    "click",
+    "openpyxl",
+    "pyyaml"
+]
+requires-python = ">=3.10"
+
+dynamic = ["version"]
+
+[tool.setuptools_scm]
+write_to = "src/x2gtfs/version.py"
