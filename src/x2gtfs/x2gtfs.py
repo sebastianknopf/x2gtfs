@@ -80,15 +80,15 @@ def load_calendar_metadata() -> tuple[dict[str, Calendar], dict[str, list[Calend
         if service_identification_cell.value is None:
             break
 
-        calendar.service_id = Configuration.config.defaults.service_id.format(service_id=len(calendar_result_list) + 1)
-        calendar.monday = Configuration.config.mappings.calendar_day_types.dict().get(ws.cell(row=current_row, column=monday_col_idx).value, 0)
-        calendar.tuesday = Configuration.config.mappings.calendar_day_types.dict().get(ws.cell(row=current_row, column=tuesday_col_idx).value, 0)
-        calendar.wednesday = Configuration.config.mappings.calendar_day_types.dict().get(ws.cell(row=current_row, column=wednesday_col_idx).value, 0)
-        calendar.thursday = Configuration.config.mappings.calendar_day_types.dict().get(ws.cell(row=current_row, column=thursday_col_idx).value, 0)
-        calendar.friday = Configuration.config.mappings.calendar_day_types.dict().get(ws.cell(row=current_row, column=friday_col_idx).value, 0)
-        calendar.saturday = Configuration.config.mappings.calendar_day_types.dict().get(ws.cell(row=current_row, column=saturday_col_idx).value, 0)
-        calendar.sunday = Configuration.config.mappings.calendar_day_types.dict().get(ws.cell(row=current_row, column=sunday_col_idx).value, 0)
-        
+        calendar.service_id = Configuration.config.defaults.service_id_pattern.format(service_id=len(calendar_result_list) + 1)
+        calendar.monday = Configuration.config.mappings.calendar_day_type.dict().get(ws.cell(row=current_row, column=monday_col_idx).value, 0)
+        calendar.tuesday = Configuration.config.mappings.calendar_day_type.dict().get(ws.cell(row=current_row, column=tuesday_col_idx).value, 0)
+        calendar.wednesday = Configuration.config.mappings.calendar_day_type.dict().get(ws.cell(row=current_row, column=wednesday_col_idx).value, 0)
+        calendar.thursday = Configuration.config.mappings.calendar_day_type.dict().get(ws.cell(row=current_row, column=thursday_col_idx).value, 0)
+        calendar.friday = Configuration.config.mappings.calendar_day_type.dict().get(ws.cell(row=current_row, column=friday_col_idx).value, 0)
+        calendar.saturday = Configuration.config.mappings.calendar_day_type.dict().get(ws.cell(row=current_row, column=saturday_col_idx).value, 0)
+        calendar.sunday = Configuration.config.mappings.calendar_day_type.dict().get(ws.cell(row=current_row, column=sunday_col_idx).value, 0)
+
         start_date_value: str|datetime = ws.cell(row=current_row, column=start_date_col_idx).value
         if isinstance(start_date_value, datetime):
             calendar.start_date = start_date_value.strftime('%Y%m%d')
@@ -143,7 +143,7 @@ def load_calendar_metadata() -> tuple[dict[str, Calendar], dict[str, list[Calend
                 Configuration.config.metadata.calendar_exceptions.date_format
             ).strftime('%Y%m%d')
 
-        calendar_date.exception_type = Configuration.config.mappings.calendar_exception_types.dict().get(
+        calendar_date.exception_type = Configuration.config.mappings.calendar_exception_type.dict().get(
             ws.cell(row=current_row, column=exception_type_col_idx).value,
             1
         )
@@ -201,7 +201,7 @@ def load_agency_and_route_metadata() -> tuple[dict[str, Agency], dict[str, Route
 
         if ws.cell(row=current_row, column=agency_name_col_idx).value not in agency_result_list.keys():
             agency = Agency()
-            agency.agency_id = Configuration.config.defaults.agency_id.format(agency_id=len(agency_result_list) + 1)
+            agency.agency_id = Configuration.config.defaults.agency_id_pattern.format(agency_id=len(agency_result_list) + 1)
             agency.agency_name = ws.cell(row=current_row, column=agency_name_col_idx).value
             agency.agency_url = ws.cell(row=current_row, column=agency_url_col_idx).value
             agency.agency_timezone = Configuration.config.defaults.agency_timezone
@@ -252,7 +252,7 @@ def process_timetable_files(
                             trip_result_list.append(current_trip)
                         
                         current_trip = Trip()
-                        current_trip.trip_id = Configuration.config.defaults.trip_id.format(trip_id=len(trip_result_list) + 1).zfill(6)
+                        current_trip.trip_id = Configuration.config.defaults.trip_id_pattern.format(trip_id=len(trip_result_list) + 1).zfill(6)
                         
                         route_idx: str = ws.cell(Configuration.config.timetables.route_identification_index, cell.column).value
                         if route_idx in route_meta_list:

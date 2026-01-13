@@ -61,14 +61,14 @@ config:
       "Standseilbahn": 7
       "Trolleybus": 11
       "Monorail": 12
-    calendar_day_types:
+    calendar_day_type:
       "x": 1
       "": 0
-    calendar_exception_types:
+    calendar_exception_type:
       "verkehrt": 1
       "verkehrt nicht": 2
   defaults:
-    agency_id: "de:agency:sample:{agency_id}"
+    agency_id_pattern: "de:agency:sample:{agency_id}"
     agency_timezone: "Europe/Berlin"
-    trip_id: "de:trip:sample:{trip_id}"
-    service_id: "de:service:sample:{service_id}"
+    trip_id_pattern: "de:trip:sample:{trip_id}"
+    service_id_pattern: "de:service:sample:{service_id}"

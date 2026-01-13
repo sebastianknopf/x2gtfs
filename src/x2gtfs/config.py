@@ -17,6 +17,7 @@ class Configuration:
 
         # define required config keys
         required_config: list[tuple[str]] = [
+            ('config', 'metadata'),
             ('config', 'timetables', 'input_directory'),
             ('config', 'timetables', 'data_start_area'),
             ('config', 'timetables', 'stop_identification_index'),
@@ -24,7 +25,10 @@ class Configuration:
             ('config', 'timetables', 'service_identification_index'),
             ('config', 'timetables', 'shape_identification_index'),
             ('config', 'timetables', 'trip_short_name_index'),
-            ('config', 'timetables', 'trip_headsign_index')
+            ('config', 'timetables', 'trip_headsign_index'),
+            ('config', 'mappings', 'route_type'),
+            ('config', 'mappings', 'calendar_day_type'),
+            ('config', 'mappings', 'calendar_exception_type')
         ]
 
         # define default config values
@@ -32,17 +36,15 @@ class Configuration:
         default_config = {
             'config': {
                 'timetables': {
-                    #'input_directory': None,
                     'layout_type': 'vertical',
                     'run_through_char': '$',
-                    'time_format': '%H:%M:%S',
-                    #'data_start_area': None,
-                    #'stop_identification_index': None,
-                    #'route_identification_index': None,
-                    #'service_identification_index': None,
-                    #'shape_identification_index': None,
-                    #'trip_short_name_index': None,
-                    #'trip_headsign_index': None
+                    'time_format': '%H:%M:%S'
+                },
+                'defaults': {
+                    'agency_id_pattern': '{agency_id}',
+                    'agency_timezone': 'Europe/Berlin',
+                    'trip_id_pattern': '{trip_id}',
+                    'service_id_pattern': '{service_id}'
                 }
             }
         }
