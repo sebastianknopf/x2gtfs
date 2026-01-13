@@ -3,6 +3,9 @@ class _ConfigNamespace:
         for key, value in entries.items():
             setattr(self, key, value)
 
+    def dict(self):
+        return self.__dict__
+    
     def __repr__(self):
         return f"<Config {self.__dict__}>"
 

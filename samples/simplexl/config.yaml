@@ -1,4 +1,42 @@
 config:
+  metadata:
+    stops:
+      input_filename: ./samples/simplexl/meta/Haltestellen.xlsx
+      stop_identification_index: C
+      stop_id_index: A
+      stop_name_index: B
+      stop_lat_index: D
+      stop_lon_index: E
+    routes:
+      input_filename: ./samples/simplexl/meta/LinienUnternehmer.xlsx
+      route_identification_index: D
+      route_id_index: A
+      route_short_name_index: B
+      route_long_name_index: C
+      route_type_index: E
+      route_color_index: F
+      route_text_color_index: G
+      agency_name_index: H
+      agency_url_index: I
+    calendars:
+      input_filename: ./samples/simplexl/meta/Kalender.xlsx
+      date_format: "%d.%m.%Y"
+      service_identification_index: A
+      monday_index: B
+      tuesday_index: C
+      wednesday_index: D
+      thursday_index: E
+      friday_index: F
+      saturday_index: G
+      sunday_index: H
+      start_date_index: I
+      end_date_index: J
+    calendar_exceptions:
+      input_filename: ./samples/simplexl/meta/KalenderAusnahmen.xlsx
+      date_format: "%d.%m.%Y"
+      service_identification_index: A
+      date_index: B
+      exception_type_index: C
   timetables:
     input_directory: ./samples/simplexl/
     layout_type: vertical
@@ -11,3 +49,26 @@ config:
     shape_identification_index: 2
     trip_short_name_index: 3
     trip_headsign_index: 4
+  mappings:
+    route_type:
+      "Straßenbahn": 0
+      "U-Bahn": 1
+      "Eisenbahn": 2
+      "Bus": 3
+      "Fähre": 4
+      "CableCar": 5
+      "Seilbahn": 6
+      "Standseilbahn": 7
+      "Trolleybus": 11
+      "Monorail": 12
+    calendar_day_types:
+      "x": 1
+      "": 0
+    calendar_exception_types:
+      "verkehrt": 1
+      "verkehrt nicht": 2
+  defaults:
+    agency_id: "de:agency:sample:{agency_id}"
+    agency_timezone: "Europe/Berlin"
+    trip_id: "de:trip:sample:{trip_id}"
+    service_id: "de:service:sample:{service_id}"
